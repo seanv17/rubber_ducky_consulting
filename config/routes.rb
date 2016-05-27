@@ -1,4 +1,16 @@
 Rails.application.routes.draw do
+  get 'products/new'
+
+  get 'products/create'
+
+  get 'products/edit'
+
+  get 'products/show'
+
+  get 'products/update'
+
+  get 'products/destroy'
+
   root to: 'welcome#index'
 
   resources :products
