@@ -5,6 +5,10 @@ class ProductsController < ApplicationController
     render :show
   end
 
+  def index
+    render :index
+  end
+
   def create
     @product = Product.new(product_params)
     @product.user = current_user
@@ -12,10 +16,16 @@ class ProductsController < ApplicationController
     respond_with(@product)
   end
 
+  def new
+  end
+
   def edit
   end
 
-  def updated
+  def update
+  end
+
+  def destroy
   end
 
 end
