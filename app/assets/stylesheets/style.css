@@ -52,6 +52,17 @@ p {
   font-size: inherit;
 }
 
+@media (min-width: 50px) {
+  #logo {
+    width: 50px;
+    margin-top: 0.4em;
+  }
+}
+
+#par-1 {
+  height: 900px;
+}
+
 footer.page-footer {
   margin: 0;
 }
