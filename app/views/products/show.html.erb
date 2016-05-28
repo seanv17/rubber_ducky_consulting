@@ -1,2 +1,4 @@
-<h1>Products#show</h1>
-<p>Find me in app/views/products/show.html.erb</p>
+<h3>Products:</h3>
+  <b>Product name :</b> <%= @product.name %><br />
+  <b>Product description: </b><em><%= @product.description %></em><br />
+  <%= image_tag @product.image %>
