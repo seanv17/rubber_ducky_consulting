@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: { registration: "registration" }
+
   root to: 'products#show'
 
   resources :products
+  resources :charges
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

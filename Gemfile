@@ -29,6 +29,9 @@ gem 'devise', '~> 3.4.1'
 # rails console tool
 gem 'hirb', '~> 0.7.3'
 
+#stripe gem
+gem 'stripe'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
