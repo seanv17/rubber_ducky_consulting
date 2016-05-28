@@ -32,6 +32,9 @@ gem 'hirb', '~> 0.7.3'
 # materialize-sass
 gem 'materialize-sass'
 
+# font awesome icons
+gem "font-awesome-rails"
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
