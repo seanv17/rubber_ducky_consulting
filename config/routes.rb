@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   root to: 'home#home'
 
-  resources :products
+  resources :invoices
   resources :charges
 
   # Example of regular route:
