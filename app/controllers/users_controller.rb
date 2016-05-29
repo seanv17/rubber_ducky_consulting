@@ -1,10 +1,11 @@
 class UsersController < ApplicationController
+
   def show
     if User.exists? params[:id]
       @user = User.find(params[:id]) || "No User"
         render :show
     else
-      redirect_to home_path
+      redirect_to root_path
     end
   end
 
@@ -15,10 +16,10 @@ class UsersController < ApplicationController
         render :edit
       else
         flash[:error] = "You can only edit your own profile"
-        redirect_to home_path
+        redirect_to root_path
       end
     else
-      redirect_to home_path
+      redirect_to root_path
     end
   end
 
