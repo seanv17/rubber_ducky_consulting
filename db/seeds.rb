@@ -4,4 +4,4 @@
 # Examples:
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Product.create({name: "Golden Duck", description: "The absolute most awesome rubber ducky a coder could wish for", price: "49.99", image:"http://s10.thisnext.com/media/largest_dimension/0CFDADF4.jpg"})
+Invoice.create({project_name: "ios-app", project_summary: "Keypress kids racing game", client_name: "Mattel", image:"http://i.imgur.com/omLSlud.jpg"})
