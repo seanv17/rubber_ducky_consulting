@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { registration: "registration" }
 
-  root to: 'products#show'
+  root to: 'home#home'
 
   resources :products
   resources :charges
