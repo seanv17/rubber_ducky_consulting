@@ -25,11 +25,15 @@
         <li><a href="sass.html">Services</a></li>
         <li><a href="collapsible.html">Inquire</a></li>
         <li><%= link_to "Pay", new_charge_path %></li>
+        <li><%= link_to "Login", new_user_session_path %></li>
+        <li><%= link_to "Logout", destroy_user_session_path %></li>
       </ul>
       <ul class="side-nav" id="mobile-demo">
         <li><a href="sass.html">Services</a></li>
         <li><a href="badges.html">Inquire</a></li>
-        <li><a href="collapsible.html">Pay</a></li>
+        <li><%= link_to "Pay", new_charge_path %></li>
+        <li><%= link_to "Login", new_user_session_path %></li>
+        <li><%= link_to "Logout", destroy_user_session_path %></li>
       </ul>
     </div>
   </nav>
@@ -38,8 +42,8 @@
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script type="text/javascript" src="assets/materialize.js"></script>
 
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
+<!-- <p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p> -->
 
 <%= yield %>
 
