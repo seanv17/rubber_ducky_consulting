@@ -4,4 +4,4 @@
 # Examples:
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Invoice.create({project_name: "ios-app", project_summary: "Keypress kids racing game", client_name: "Mattel", image:"http://i.imgur.com/omLSlud.jpg"})
+Invoice.create({project_name: "ios-app", project_summary: "Keypress kids racing game", client_name: "Mattel", amount_due: 2500.00, image:"http://i.imgur.com/omLSlud.jpg"})
