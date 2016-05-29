@@ -15,14 +15,10 @@
 //= require turbolinks
 //= require_tree .
 
-(function($){
   $(function(){
     $('.parallax').parallax();
   });
-})(jQuery);
 
-(function($){
   $(function(){
     $(".button-collapse").sideNav();
   });
-})(jQuery);
