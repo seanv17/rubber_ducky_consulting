@@ -8,6 +8,7 @@
           <b>Project Summary:</b> <%= @invoice.project_summary %><br>
           <b>Amount Due:</b> $<%= @invoice.amount_due %><br>
           <b>Status:</b> <%= yesno(@invoice.status) %><br>
+          <a class="waves-effect waves-light btn"><i class="material-icons left">shop</i>Pay</a>
         </p>
         <% if current_user[:role] === User.roles[:admin] %>
         <%= link_to 'Edit', edit_invoice_path(@invoice) %>

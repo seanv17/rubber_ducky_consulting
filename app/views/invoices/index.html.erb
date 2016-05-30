@@ -18,9 +18,7 @@
           <%= button_to 'Edit', edit_invoice_path(invoice.id), method: :get %>
           <%= button_to 'Delete', invoice, method: :delete %>
           <% end %>
-          <% if invoice.status === false %>
           <a class="waves-effect waves-light btn"><i class="material-icons left">shop</i>Pay</a>
-          <% end %>
         </p>
         <hr />
       <% end %>

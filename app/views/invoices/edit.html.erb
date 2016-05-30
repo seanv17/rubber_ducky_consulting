@@ -2,41 +2,41 @@
   <div class="container">
     <h1>Edit Invoice</h1>
     <%= form_for @invoice do |f| %>
-      <div class="row">
-        <form class="col s12">
-          <div class="row">
-            <div class="input-field col s6">
-              <%= f.text_field :client_name, :class => "validate" %>
-            </div>
-            <div class="input-field col s6">
-              <input type="date" class="datepicker">
-            </div>
+    <div class="row">
+      <form class="col s12">
+        <div class="row">
+          <div class="input-field col s6">
+            <%= f.text_field :client_name, :class => "validate" %>
           </div>
-          <div class="row">
-            <div class="input-field col s12">
-              <%= f.text_field :project_name, :class => "validate" %>
-            </div>
+          <div class="input-field col s6">
+            <input type="date" class="datepicker">
           </div>
-          <div class="row">
-            <div class="input-field col s12">
-              <%= f.text_field :project_summary, :class => "validate" %>
-            </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <%= f.text_field :project_name, :class => "validate" %>
           </div>
-          <div class="row">
-            <div class="input-field col s6">
-              <%= f.text_field :amount_due, :class => "validate" %>
-            </div>
-            <div class="input-field col s6">
-              <select class="browser-default">
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <%= f.text_field :project_summary, :class => "validate" %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s6">
+            <%= f.text_field :amount_due, :class => "validate" %>
+          </div>
+          <div class="input-field col s6">
+            <select class="browser-default">
                 <option value="" disabled selected>Payment Status</option>
-                <option value="true">Paid</option>
-                <option value="Unpaid">Unpaid</option>
-              </select>
-            </div>
+                <option value="0">Paid</option>
+                <option value="1">Unpaid</option>
+            </select>
           </div>
-          <button class="btn waves-effect waves-light" type="submit" name="action">Save Invoice</button>
-          <% end %>
-        </form>
-      </div>
+        </div>
+        <button class="btn waves-effect waves-light" type="submit" name="action">Save Invoice</button>
+        <% end %>
+      </form>
+    </div>
   </div>
 </div>

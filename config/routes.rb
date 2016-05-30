@@ -8,6 +8,4 @@ Rails.application.routes.draw do
 
   root to: 'home#home'
 
-  delete      '/invoices/:id',       to: 'invoices#destroy',  as: :destroy_invoice
-
 end
