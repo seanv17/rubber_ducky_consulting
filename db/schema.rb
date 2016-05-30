@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160530201208) do
+ActiveRecord::Schema.define(version: 20160530221718) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,9 +23,9 @@ ActiveRecord::Schema.define(version: 20160530201208) do
     t.decimal  "amount_due"
     t.date     "date"
     t.integer  "user_id"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
-    t.boolean  "status",          default: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.boolean  "status"
   end
 
   add_index "invoices", ["user_id"], name: "index_invoices_on_user_id", using: :btree

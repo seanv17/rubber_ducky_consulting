@@ -1,7 +1,7 @@
 module InvoicesHelper
 
   def yesno(x)
-    x ? "Yes" : "No"
+    x ? "Paid" : "Unpaid"
   end
 
 end
