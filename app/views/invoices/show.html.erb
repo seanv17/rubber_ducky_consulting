@@ -1,2 +1,12 @@
-<h1>Invoices#show</h1>
-<p>Find me in app/views/invoices/show.html.erb</p>
+<div id="invoice_index">
+  <div class="container">
+        <p>
+          <b>Date:</b> <%= @invoice.date %><br>
+          <b>Invoice ID:</b> <%= @invoice.id %><br>
+          <b>Client Name:</b> <%= @invoice.client_name %><br>
+          <b>Project Name:</b> <%= @invoice.project_name %><br>
+          <b>Project Summary:</b> <%= @invoice.project_summary %><br>
+          <b>Amount Due:</b> $<%= @invoice.amount_due %><br>
+        </p>
+  </div>
+</div>
