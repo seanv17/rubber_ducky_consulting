@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
 
-  # set user enum role
+  # set user enum roles
   enum role: {admin: 0, client: 1}
 
   after_initialize :set_default_role, :if => :new_record?
