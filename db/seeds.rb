@@ -4,4 +4,8 @@
 # Examples:
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Invoice.create({project_name: "ios-app", project_summary: "Keypress kids racing game", client_name: "Mattel", amount_due: 2500.00, image:"http://i.imgur.com/omLSlud.jpg"})
+User.create({ first_name: "Reggie", last_name: "Thompson", company: "RDC", role: 0, email: "reggie@gmail.com", password: "12345678" })
+User.create({ first_name: "Sarah", last_name: "Lewis", company: "Mattel", role: 1, email: "sarah@gmail.com", password: "12345678" })
+User.create({ first_name: "George", last_name: "Vandalay", company: "NBC", role: 1, email: "george@gmail.com", password: "12345678" })
+
+Invoice.create({  })
