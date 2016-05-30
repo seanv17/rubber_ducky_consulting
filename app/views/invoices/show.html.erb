@@ -8,5 +8,6 @@
           <b>Project Summary:</b> <%= @invoice.project_summary %><br>
           <b>Amount Due:</b> $<%= @invoice.amount_due %><br>
         </p>
+        <%= link_to 'Edit', edit_invoice_path(@invoice) %>
   </div>
 </div>

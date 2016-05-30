@@ -20,9 +20,16 @@ class InvoicesController < ApplicationController
   end
 
   def edit
+    @invoice = Invoice.find(params[:id])
   end
 
   def update
+    @invoice = Invoice.find(params[:id])
+    if @invoice.update(invoice_params)
+      redirect_to invoice_path, notice: "Invoice was successfully updated"
+    else
+      render :edit
+    end
   end
 
   def destroy
