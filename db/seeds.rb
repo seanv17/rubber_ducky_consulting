@@ -4,8 +4,12 @@
 # Examples:
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-User.create({ first_name: "Reggie", last_name: "Thompson", company: "RDC", role: 0, email: "reggie@gmail.com", password: "12345678" })
-User.create({ first_name: "Sarah", last_name: "Lewis", company: "Mattel", role: 1, email: "sarah@gmail.com", password: "12345678" })
-User.create({ first_name: "George", last_name: "Vandalay", company: "NBC", role: 1, email: "george@gmail.com", password: "12345678" })
+Invoice.destroy_all
+User.destroy_all
 
-Invoice.create({  })
+admin_user   = User.create({ first_name: "Reggie", last_name: "Thompson", company: "RDC", role: 0, email: "reggie@gmail.com", password: "12345678" })
+mattel_sarah_lewis = User.create({ first_name: "Sarah", last_name: "Lewis", company: "Mattel", role: 1, email: "sarah@gmail.com", password: "12345678" })
+nbc_george_vandalay = User.create({ first_name: "George", last_name: "Vandalay", company: "NBC", role: 1, email: "george@gmail.com", password: "12345678" })
+
+Invoice.create({ client: "Mattel", project_name: "iOS action_figure app", project_summary: "Become your favorite superheroes and villians, fight other players with blocky movement, and unlock new characters.", amount_due: 2999.99, date: 2014-10-12, user_id: mattel_sarah_lewis.id })
+Invoice.create({ client: "NBC", project_name: "Sketch comedy app", project_summary: "Challenge your friends and family to a game of improv and sketch comedy.", amount_due: 1599.99, date: 1997-2-12, user_id: nbc_george_vandalay.id })
