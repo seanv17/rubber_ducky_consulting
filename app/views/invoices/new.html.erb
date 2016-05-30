@@ -1,2 +1,39 @@
-<h1>Invoices#new</h1>
-<p>Find me in app/views/invoices/new.html.erb</p>
+<div id="invoice_index">
+  <div class="container">
+    <h1>Create a New Invoice</h1>
+    <%= form_for @invoice do |f| %>
+      <div class="row">
+        <form class="col s12">
+          <div class="row">
+            <div class="input-field col s6">
+              <%= f.label :client_name, "Client Name" %>
+              <%= f.text_field :client_name, :class => "validate" %>
+            </div>
+            <div class="input-field col s6">
+              <input type="date" class="datepicker">
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <%= f.label :project_name, "Project Name" %>
+              <%= f.text_field :project_name, :class => "validate" %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <%= f.label :project_summary, "Project Summary" %>
+              <%= f.text_field :project_summary, :class => "validate" %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <%= f.label :amount_due, "Amount Due" %>
+              <%= f.text_field :amount_due, :class => "validate" %>
+            </div>
+          </div>
+          <button class="btn waves-effect waves-light" type="submit" name="action">Save Invoice</button>
+          <% end %>
+        </form>
+      </div>
+  </div>
+</div>
