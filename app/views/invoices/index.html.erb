@@ -9,6 +9,7 @@
           <b>Project Name:</b> <%= invoice.project_name %><br>
           <b>Project Summary:</b> <%= invoice.project_summary %><br>
           <b>Amount Due:</b> $<%= invoice.amount_due %><br>
+          <b>Status:</b> <%= yesno(invoice.status) %><br>
           <%= button_to 'Edit', edit_invoice_path(invoice.id), method: :get %>
           <%= button_to 'Delete', invoice, method: :delete %>
         </p>
