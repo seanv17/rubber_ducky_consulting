@@ -1,7 +1,11 @@
 class InvoicesController < ApplicationController
 
   def index
+    if current_user[:role] === User.roles[:admin]
     @invoices = Invoice.all
+    else
+      @invoices = current_user.invoices
+    end
   end
 
   def show

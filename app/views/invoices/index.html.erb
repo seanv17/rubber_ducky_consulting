@@ -1,6 +1,8 @@
 <div id="invoice_index">
   <div class="container">
+      <% if current_user[:role] === User.roles[:admin] %>
       <%= button_to 'Create new Invoice', new_invoice_path, method: :get %>
+      <% end %>
       <% @invoices.each do |invoice| %>
         <p>
           <b>Date:</b> <%= invoice.date %><br>
@@ -10,8 +12,10 @@
           <b>Project Summary:</b> <%= invoice.project_summary %><br>
           <b>Amount Due:</b> $<%= invoice.amount_due %><br>
           <b>Status:</b> <%= yesno(invoice.status) %><br>
+          <% if current_user[:role] === User.roles[:admin] %>
           <%= button_to 'Edit', edit_invoice_path(invoice.id), method: :get %>
           <%= button_to 'Delete', invoice, method: :delete %>
+          <% end %>
         </p>
         <hr />
       <% end %>
