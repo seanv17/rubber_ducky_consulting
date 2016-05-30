@@ -1,17 +1,4 @@
 Rails.application.routes.draw do
-  get 'invoices/index'
-
-  get 'invoices/show'
-
-  get 'invoices/new'
-
-  get 'invoices/create'
-
-  get 'invoices/edit'
-
-  get 'invoices/update'
-
-  get 'invoices/destroy'
 
   devise_for :users
 
@@ -20,5 +7,7 @@ Rails.application.routes.draw do
   resources :invoices
 
   root to: 'home#home'
+
+  delete      '/invoices/:id',       to: 'invoices#destroy',  as: :destroy_invoice
 
 end

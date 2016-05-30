@@ -9,7 +9,8 @@
           <b>Project Summary:</b> <%= invoice.project_summary %><br>
           <b>Amount Due:</b> $<%= invoice.amount_due %><br>
           <% if current_user[:role] === User.roles[:admin] %>
-          <%= link_to 'Edit', edit_invoice_path(invoice) %>
+          <%= button_to 'Edit', edit_invoice_path(invoice.id), method: :get %>
+          <%= button_to 'Delete', invoice, method: :delete %>
           <% end %>
         </p>
         <hr />

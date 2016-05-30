@@ -20,19 +20,28 @@ class InvoicesController < ApplicationController
   end
 
   def edit
-    @invoice = Invoice.find(params[:id])
+    @invoice = Invoice.find_by_id(params[:id])
   end
 
   def update
-    @invoice = Invoice.find(params[:id])
+    @invoice = Invoice.find_by_id(params[:id])
     if @invoice.update(invoice_params)
       redirect_to invoice_path, notice: "Invoice was successfully updated"
     else
+      flash[:error] = @invoice.errors.full_messages.join(", ")
       render :edit
     end
   end
 
   def destroy
+    invoice = Invoice.find_by_id(params[:id])
+      if invoice.destroy
+        flash[:notice] = "Invoice was successfully deleted"
+        redirect_to invoices_path
+      else
+        flash[:error] = @invoice.errors.full_messages.join(" , ")
+        render :edit
+      end
   end
 
   private
