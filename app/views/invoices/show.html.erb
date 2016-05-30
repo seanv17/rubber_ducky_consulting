@@ -8,6 +8,8 @@
           <b>Project Summary:</b> <%= @invoice.project_summary %><br>
           <b>Amount Due:</b> $<%= @invoice.amount_due %><br>
         </p>
+        <% if current_user[:role] === User.roles[:admin] %>
         <%= link_to 'Edit', edit_invoice_path(@invoice) %>
+        <% end %>
   </div>
 </div>
