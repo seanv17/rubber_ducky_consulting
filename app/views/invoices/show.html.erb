@@ -6,6 +6,8 @@
           <b>Client Name:</b> <%= @invoice.client_name %><br>
           <b>Project Name:</b> <%= @invoice.project_name %><br>
           <b>Project Summary:</b> <%= @invoice.project_summary %><br>
+          <%= form_tag charges_path, id: 'chargeForm' do %>
+          <script src="https://checkout.stripe.com/checkout.js"></script>
           <b>Amount Due:</b> $<span id="amount"><%= @invoice.amount_due %></span><br>
           <b>Status:</b> <%= yesno(@invoice.status) %><br>
         </p>
@@ -13,10 +15,9 @@
         <%= link_to 'Edit', edit_invoice_path(@invoice) %>
         <% end %>
 
-        <%= form_tag charges_path, id: 'chargeForm' do %>
-          <script src="https://checkout.stripe.com/checkout.js"></script>
           <%= hidden_field_tag 'stripeToken' %>
           <%= hidden_field_tag 'stripeEmail' %>
+          <%= hidden_field_tag 'stripeAmount' %>
           <a class="waves-effect waves-light btn"><i class="material-icons left" id="pay_button">shop</i>Pay</a>
 
           <script>
@@ -25,8 +26,9 @@
               image: '#',
               locale: 'auto',
               token: function(token, args) {
-                document.getElementById("stripeToken").value = stripeToken;
-                document.getElementById("stripeEmail").value = stripeEmail;
+                document.getElementById("stripeToken").value = token.id;
+                document.getElementById("stripeEmail").value = token.email;
+                document.getElementById("stripeAmount").value = <%= @invoice.amount_due %>;
                 document.getElementById("chargeForm").submit();
               }
             });
@@ -34,21 +36,21 @@
             document.getElementById('pay_button').addEventListener('click', function(e) {
               console.log("stripe open");
               // Set amount_due to amount to pass to Stripe
-              var amount = parseInt($("#amount").text()) * 100;
+              // var amount = parseInt($("#amount").text()) * 100;
               // Open Checkout with further options:
               handler.open({
-                name: 'RDC Consulting',
+                name: 'Customers name',
                 description: 'Invoice payment',
-                amount: amount
+                amount: <%= @invoice.amount_due * 100 %>
               });
               e.preventDefault();
             });
 
             // Close Checkout on page navigation:
-            // $(window).on('popstate', function() {
-            //   console.log("stripe close");
-            //   handler.close();
-            // });
+            $(window).on('popstate', function() {
+              console.log("stripe close");
+              handler.close();
+            });
           </script>
           <% end %>
   </div>
