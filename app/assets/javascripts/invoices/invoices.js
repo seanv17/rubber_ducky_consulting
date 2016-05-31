@@ -1,8 +1,7 @@
 // Materialize JS for Calendar and Select Form
 
-  $(document).ready(function() {
-    $('select').material_select();
-  });
+$(document).ready(function() {
+  $('select').material_select();
 
   $('.datepicker').pickadate({
     selectMonths: true, // Creates a dropdown to control month

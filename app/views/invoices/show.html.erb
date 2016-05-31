@@ -6,12 +6,43 @@
           <b>Client Name:</b> <%= @invoice.client_name %><br>
           <b>Project Name:</b> <%= @invoice.project_name %><br>
           <b>Project Summary:</b> <%= @invoice.project_summary %><br>
-          <b>Amount Due:</b> $<%= @invoice.amount_due %><br>
+          <b>Amount Due:</b> $<span id="amount"><%= @invoice.amount_due %></span><br>
           <b>Status:</b> <%= yesno(@invoice.status) %><br>
-          <a class="waves-effect waves-light btn"><i class="material-icons left">shop</i>Pay</a>
+          <a class="waves-effect waves-light btn"><i class="material-icons left" id="pay_button">shop</i>Pay</a>
         </p>
         <% if current_user[:role] === User.roles[:admin] %>
         <%= link_to 'Edit', edit_invoice_path(@invoice) %>
         <% end %>
+
+        <script src="https://checkout.stripe.com/checkout.js"></script>
+
+          <script>
+            var handler = StripeCheckout.configure({
+              key: 'pk_test_wZNOidoqT5EW8udvUNuJpggy',
+              image: '#',
+              locale: 'auto',
+              token: function(token) {
+                // You can access the token ID with `token.id`.
+                // Get the token ID to your server-side code for use.
+              }
+            });
+
+            $('#pay_button').on('click', function(e) {
+              // Open Checkout with further options:
+              handler.open({
+                var amount = $("#amount").val() *100;
+                name: 'RDC Consulting',
+                description: 'paying invoice',
+                amount: amount
+              });
+              e.preventDefault();
+            });
+
+            // Close Checkout on page navigation:
+            $(window).on('popstate', function() {
+              handler.close();
+            });
+          </script>
+
   </div>
 </div>

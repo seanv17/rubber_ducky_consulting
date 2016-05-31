@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree ./sitewide
+//= require materialize-sprockets
+//= require ./sitewide/navbar
 //= require ./home/home
 //= require ./invoices/invoices

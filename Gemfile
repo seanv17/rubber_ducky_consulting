@@ -32,6 +32,9 @@ gem 'hirb', '~> 0.7.3'
 #stripe gem
 gem 'stripe'
 
+# materialize-sass gem
+gem 'materialize-sass'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
