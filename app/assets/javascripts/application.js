@@ -12,13 +12,5 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
 //= require_tree ./sitewide
-
-$(document).ready(function() {
-
-  $(function(){
-    $('.parallax').parallax();
-  });
-
-});
+//= require ./home/home
