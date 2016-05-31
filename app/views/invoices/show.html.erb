@@ -13,39 +13,43 @@
         <%= link_to 'Edit', edit_invoice_path(@invoice) %>
         <% end %>
 
-        <script src="https://checkout.stripe.com/checkout.js"></script>
-
-        <a class="waves-effect waves-light btn"><i class="material-icons left" id="pay_button">shop</i>Pay</a>
+        <%= form_tag charges_path, id: 'chargeForm' do %>
+          <script src="https://checkout.stripe.com/checkout.js"></script>
+          <%= hidden_field_tag 'stripeToken' %>
+          <%= hidden_field_tag 'stripeEmail' %>
+          <a class="waves-effect waves-light btn"><i class="material-icons left" id="pay_button">shop</i>Pay</a>
 
           <script>
             var handler = StripeCheckout.configure({
               key: 'pk_test_wZNOidoqT5EW8udvUNuJpggy',
               image: '#',
               locale: 'auto',
-              token: function(token) {
-                // You can access the token ID with `token.id`.
-                // Get the token ID to your server-side code for use.
+              token: function(token, args) {
+                document.getElementById("stripeToken").value = stripeToken;
+                document.getElementById("stripeEmail").value = stripeEmail;
+                document.getElementById("chargeForm").submit();
               }
             });
 
-            $('#pay_button').on('click', function(e) {
+            document.getElementById('pay_button').addEventListener('click', function(e) {
               console.log("stripe open");
+              // Set amount_due to amount to pass to Stripe
               var amount = parseInt($("#amount").text()) * 100;
               // Open Checkout with further options:
               handler.open({
                 name: 'RDC Consulting',
-                description: 'paying invoice',
+                description: 'Invoice payment',
                 amount: amount
               });
               e.preventDefault();
             });
 
             // Close Checkout on page navigation:
-            $(window).on('popstate', function() {
-              console.log("stripe close");
-              handler.close();
-            });
+            // $(window).on('popstate', function() {
+            //   console.log("stripe close");
+            //   handler.close();
+            // });
           </script>
-
+          <% end %>
   </div>
 </div>
