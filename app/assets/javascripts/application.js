@@ -14,3 +14,4 @@
 //= require jquery_ujs
 //= require_tree ./sitewide
 //= require ./home/home
+//= require ./invoices/invoices
