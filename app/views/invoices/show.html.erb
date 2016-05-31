@@ -8,13 +8,14 @@
           <b>Project Summary:</b> <%= @invoice.project_summary %><br>
           <b>Amount Due:</b> $<span id="amount"><%= @invoice.amount_due %></span><br>
           <b>Status:</b> <%= yesno(@invoice.status) %><br>
-          <a class="waves-effect waves-light btn"><i class="material-icons left" id="pay_button">shop</i>Pay</a>
         </p>
         <% if current_user[:role] === User.roles[:admin] %>
         <%= link_to 'Edit', edit_invoice_path(@invoice) %>
         <% end %>
 
         <script src="https://checkout.stripe.com/checkout.js"></script>
+
+        <a class="waves-effect waves-light btn"><i class="material-icons left" id="pay_button">shop</i>Pay</a>
 
           <script>
             var handler = StripeCheckout.configure({
@@ -29,9 +30,11 @@
 
             $('#pay_button').on('click', function(e) {
               console.log("hiiiiii");
+              var amount = parseInt($("#amount").text()) * 100;
+              console.log(amount);
               // Open Checkout with further options:
               handler.open({
-                var amount = $("#amount").val() *100;
+                //var amount = $("#amount").val() *100;
                 name: 'RDC Consulting',
                 description: 'paying invoice',
                 amount: amount
