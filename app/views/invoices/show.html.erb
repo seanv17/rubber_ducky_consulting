@@ -29,12 +29,10 @@
             });
 
             $('#pay_button').on('click', function(e) {
-              console.log("hiiiiii");
+              console.log("stripe open");
               var amount = parseInt($("#amount").text()) * 100;
-              console.log(amount);
               // Open Checkout with further options:
               handler.open({
-                //var amount = $("#amount").val() *100;
                 name: 'RDC Consulting',
                 description: 'paying invoice',
                 amount: amount
@@ -44,6 +42,7 @@
 
             // Close Checkout on page navigation:
             $(window).on('popstate', function() {
+              console.log("stripe close");
               handler.close();
             });
           </script>
