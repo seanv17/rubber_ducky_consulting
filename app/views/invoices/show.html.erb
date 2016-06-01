@@ -18,6 +18,7 @@
           <%= hidden_field_tag 'stripeToken' %>
           <%= hidden_field_tag 'stripeEmail' %>
           <%= hidden_field_tag 'stripeAmount' %>
+          <%= hidden_field_tag 'description' %>
           <a class="waves-effect waves-light btn"><i class="material-icons left" id="pay_button">shop</i>Pay</a>
 
           <script>
@@ -29,6 +30,7 @@
                 document.getElementById("stripeToken").value = token.id;
                 document.getElementById("stripeEmail").value = token.email;
                 document.getElementById("stripeAmount").value = <%= @invoice.amount_due %>;
+                document.getElementById("description").value = <%= @invoice.id %>;
                 document.getElementById("chargeForm").submit();
               }
             });
