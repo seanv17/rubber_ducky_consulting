@@ -19,10 +19,6 @@ class InvoicesController < ApplicationController
   def create
     invoice = Invoice.new(invoice_params)
 
-    if invoice.client_name == @invoice.client_name
-      invoice.update_attribute(:user_id, @invoice.user_id)
-    end
-
     if invoice.save
       redirect_to invoice_path(invoice)
     end
@@ -56,7 +52,7 @@ class InvoicesController < ApplicationController
   private
 
   def invoice_params
-    params.require(:invoice).permit(:client_name, :date, :project_name, :project_summary, :amount_due, :status)
+    params.require(:invoice).permit(:client_name, :date, :project_name, :project_summary, :amount_due, :status, :user_id)
   end
 
 end
