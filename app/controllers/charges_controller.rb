@@ -27,6 +27,10 @@ class ChargesController < ApplicationController
       @invoice.update_attribute(:status, true)
     end
 
+    if charge.save
+      redirect_to invoices_path
+    end
+
   rescue Stripe::CardError => e
     flash[:error] = e.message
     redirect_to invoices_path

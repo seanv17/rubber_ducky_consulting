@@ -18,6 +18,11 @@ class InvoicesController < ApplicationController
 
   def create
     invoice = Invoice.new(invoice_params)
+
+    if invoice.client_name == @invoice.client_name
+      invoice.update_attribute(:user_id, @invoice.user_id)
+    end
+
     if invoice.save
       redirect_to invoice_path(invoice)
     end

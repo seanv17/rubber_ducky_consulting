@@ -45,17 +45,13 @@
   </nav>
 
   <!-- start flash messages -->
-    <div>
       <% flash.each do |key, value| %>
-        <div class="alert alert-dismissible alert-<%= key %>">
-
+        <span class="alert alert-dismissible alert-<%= key %>">
           <script type="text/javascript">
             Materialize.toast('<%= value %>', 4000)
           </script>
-  ​
-        </div>
+        </span>
       <% end %>
-    </div>
 
 <%= yield %>
 
