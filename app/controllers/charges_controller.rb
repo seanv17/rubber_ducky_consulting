@@ -5,7 +5,7 @@ class ChargesController < ApplicationController
 
   def create
 
-    amount = params[:stripeAmount].to_i
+    amount = params[:stripeAmount].to_i * 100
     Stripe.api_key = "sk_test_PBG7t6ioRODdf7GSj2mrgQGo"
 
     customer = Stripe::Customer.create(
