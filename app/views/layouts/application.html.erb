@@ -44,8 +44,18 @@
     </div>
   </nav>
 
-<!-- <p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p> -->
+  <!-- start flash messages -->
+    <div>
+      <% flash.each do |key, value| %>
+        <div class="alert alert-dismissible alert-<%= key %>">
+
+          <script type="text/javascript">
+            Materialize.toast('<%= value %>', 4000)
+          </script>
+  ​
+        </div>
+      <% end %>
+    </div>
 
 <%= yield %>
 

@@ -27,11 +27,7 @@
             <%= f.text_field :amount_due, :class => "validate" %>
           </div>
           <div class="input-field col s6">
-            <select class="browser-default">
-                <option value="" disabled selected>Payment Status</option>
-                <option value="0">Paid</option>
-                <option value="1">Unpaid</option>
-            </select>
+            <%= f.select :status, { Paid: true, Unpaid: false }, :prompt => 'Payment Status' %>
           </div>
         </div>
         <button class="btn waves-effect waves-light" type="submit" name="action">Save Invoice</button>

@@ -33,11 +33,7 @@
           </div>
           <div class="row">
             <div class="input-field col s6">
-              <select multiple>
-                <option value="" disabled selected>Payment Status</option>
-                <option value="true">Paid</option>
-                <option value="false">Unpaid</option>
-              </select>
+              <%= f.select :status, { Paid: true, Unpaid: false }, :prompt => 'Payment Status' %>
             </div>
             <div class="input-field col s6">
               <button class="btn waves-effect waves-light" type="submit" name="action">Save Invoice</button>
