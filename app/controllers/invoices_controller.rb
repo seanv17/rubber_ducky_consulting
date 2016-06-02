@@ -33,6 +33,7 @@ class InvoicesController < ApplicationController
   def create
     @invoice = Invoice.new(invoice_params)
     @invoice.user_id = current_user.id
+
     if @invoice.save
       redirect_to invoice_path(@invoice)
       flash[:notice] = "Invoice successfully created"
@@ -53,25 +54,32 @@ class InvoicesController < ApplicationController
   end
 
   def update
-    @invoice = Invoice.find_by_id(params[:id])
-    if @invoice.update(invoice_params)
+    if
+      user_signed_in?
+      @invoice = Invoice.find_by_id(params[:id])
+    if
+      @invoice.update(invoice_params)
       flash[:notice] = "Invoice was successfully updated"
       redirect_to invoice_path
     else
       flash[:error] = @invoice.errors.full_messages.join(", ")
       render :edit
     end
+    end
   end
 
   def destroy
-    invoice = Invoice.find_by_id(params[:id])
-      if invoice.destroy
-        flash[:notice] = "Invoice was successfully deleted"
-        redirect_to invoices_path
-      else
-        flash[:error] = @invoice.errors.full_messages.join(" , ")
-        render :edit
-      end
+    if
+      user_signed_in?
+      invoice = Invoice.find_by_id(params[:id])
+    if invoice.destroy
+      flash[:notice] = "Invoice was successfully deleted"
+      redirect_to invoices_path
+    else
+      flash[:error] = @invoice.errors.full_messages.join(" , ")
+      render :edit
+    end
+    end
   end
 
   private
