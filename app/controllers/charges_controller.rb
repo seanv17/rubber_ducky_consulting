@@ -30,6 +30,7 @@ class ChargesController < ApplicationController
 
     if charge.save
       redirect_to invoices_path
+      flash[:notice] = "Payment was successfully submitted"
     end
 
   rescue Stripe::CardError => e

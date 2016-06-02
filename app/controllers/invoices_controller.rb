@@ -26,7 +26,7 @@ class InvoicesController < ApplicationController
       current_user[:role] == User.roles[:admin]
       @invoice = Invoice.new
     else
-      flash[:error] = "Not authorized"
+      flash.now[:error] = "Not authorized"
       redirect_to invoices_path
     end
   end
@@ -37,9 +37,9 @@ class InvoicesController < ApplicationController
 
     if @invoice.save
       redirect_to invoice_path(@invoice)
-      flash[:notice] = "Invoice successfully created"
+      flash.now[:notice] = "Invoice successfully created"
     else
-      flash[:error] = @invoice.errors.full_messages.join(" , ")
+      flash.now[:error] = @invoice.errors.full_messages.join(" , ")
       render :new
     end
   end
@@ -49,7 +49,7 @@ class InvoicesController < ApplicationController
       current_user[:role] == User.roles[:admin]
       @invoice = Invoice.find_by_id(params[:id])
     else
-      flash[:error] = "Not authorized"
+      flash.now[:error] = "Not authorized"
       redirect_to invoices_path
     end
   end
@@ -60,10 +60,10 @@ class InvoicesController < ApplicationController
       @invoice = Invoice.find_by_id(params[:id])
     if
       @invoice.update(invoice_params)
-      flash[:notice] = "Invoice was successfully updated"
+      flash.now[:notice] = "Invoice was successfully updated"
       redirect_to invoice_path
     else
-      flash[:error] = @invoice.errors.full_messages.join(", ")
+      flash.now[:error] = @invoice.errors.full_messages.join(", ")
       render :edit
     end
     end
