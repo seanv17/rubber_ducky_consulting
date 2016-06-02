@@ -20,4 +20,4 @@ client2 = User.create({ first_name: "George", last_name: "Vandalay", company: "N
 # Invoice.create({ client_name: "NBC", project_name: "Sketch comedy app", project_summary: "Challenge your friends and family to a game of improv and sketch comedy", amount_due: 2999.99, date: Date.parse('07/11/2004 3:25'), user_id: client2.id })
 
 
-client1.invoices.create({ client_name: "Mattel", project_name: "iOS action_figure app", project_summary: "Become your favorite superheroes and villians, fight other players with blocky movement, and unlock new characters", amount_due: 3999.99, date: Date.parse('10/5/2012 10:47'), user: client1})
+client1.invoices.create({ client_name: "Mattel", project_name: "iOS action_figure app", project_summary: "Become your favorite superheroes and villians, fight other players with blocky movement, and unlock new characters", amount_due: 3999.99, date: Date.parse('10/5/2012 10:47')})
