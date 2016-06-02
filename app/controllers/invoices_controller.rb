@@ -2,9 +2,9 @@ class InvoicesController < ApplicationController
 
   def index
     if current_user[:role] === User.roles[:admin]
-    @invoices = Invoice.all
+    @invoices = Invoice.all.sort_by { |a| a.status ? 1 : 0 }
     else
-      @invoices = current_user.invoices
+      @invoices = current_user.invoices.sort_by { |a| a.status ? 1 : 0 }
     end
   end
 
