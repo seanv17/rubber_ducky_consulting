@@ -1,7 +1,7 @@
 <div id="invoice_index">
   <div class="container">
     <p>
-      <b>Date:</b> <%= @invoice.date %><br>
+      <b>Date:</b> <%= @invoice.date.strftime("%m/%d/%Y") %><br>
       <b>Invoice ID:</b> <%= @invoice.id %><br>
       <b>Client Name:</b>
       <% if @invoice.user_id == 37 %>

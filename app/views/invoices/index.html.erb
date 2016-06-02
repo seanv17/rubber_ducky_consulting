@@ -6,7 +6,7 @@
       <% end %>
           <% @invoices.each do |invoice| %>
           <b>Invoice ID:</b> <%= link_to invoice.id, invoice_path( Invoice.find(invoice.id) ) %><br>
-          <b>Date:</b> <%= invoice.date %><br>
+          <b>Date:</b> <%= invoice.date.strftime("%m/%d/%Y") %><br>
           <% if current_user[:role] === User.roles[:admin] %>
           <b>Client Name:</b>
             <% if invoice.user_id == 37 %>

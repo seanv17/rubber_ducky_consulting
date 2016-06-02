@@ -22,8 +22,6 @@ class ChargesController < ApplicationController
       :description    => params[:description]
     )
 
-    puts charge
-
     # Find invoice based on invoice id originally passed in from 'description' Stripe object
     @invoice = Invoice.find(charge[:description])
     if charge[:paid]
