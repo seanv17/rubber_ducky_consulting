@@ -43,7 +43,13 @@ class InvoicesController < ApplicationController
   end
 
   def edit
-    @invoice = Invoice.find_by_id(params[:id])
+    if
+      current_user[:role] == User.roles[:admin]
+      @invoice = Invoice.find_by_id(params[:id])
+    else
+      flash[:error] = "Not authorized"
+      redirect_to invoices_path
+    end
   end
 
   def update
