@@ -11,22 +11,22 @@ admin = User.create({ first_name: "Reggie", last_name: "Thompson", company: "RDC
 client1 = User.create({ first_name: "Sarah", last_name: "Lewis", company: "Mattel", role: 1, email: "sarah@gmail.com", password: "12345678" })
 client2 = User.create({ first_name: "George", last_name: "Vandalay", company: "NBC", role: 1, email: "george@gmail.com", password: "12345678" })
 
-# Invoice.create({ client_name: "Mattel", project_name: "iOS action_figure app", project_summary: "Become your favorite superheroes and villians, fight other players with blocky movement, and unlock new characters", amount_due: 3999.99, date: Date.parse('10/5/2012 10:47'), user: client1})
-# Invoice.create({ client_name: "Mattel", project_name: "Company blog", project_summary: "Company blog where select users can create posts for all to see", amount_due: 1599.99, date: Date.parse('02/12/1997 3:25'), user: client1 })
-# Invoice.create({ client_name: "Mattel", project_name: "Charades app", project_summary: "Test your acting skills with charades app themed with NBC shows and programming", amount_due: 3599.99, date: Date.parse('06/12/1999 4:25'), user: admin })
-# Invoice.create({ client_name: "NBC", project_name: "TV remote app", project_summary: "Control your TV from your phone", amount_due: 5699.99, date: Date.parse('01/02/2000 1:25'), user_id: client2.id })
-# Invoice.create({ client_name: "NBC", project_name: "Trivial pursuit app", project_summary: "Be king/queen of TV and show off to your friends and family with your frivolous knowledge", amount_due: 2799.99, date: Date.parse('04/06/2002 3:25'), user_id: client2.id })
-# Invoice.create({ client_name: "NBC", project_name: "Movie preview app", project_summary: "Watch movie previes, read moving ratings from Rotten Tomatoes, and share with your friends and family your reviews!", amount_due: 6899.99, date: Date.parse('04/12/2003 3:25'), user_id: client2.id })
-# Invoice.create({ client_name: "NBC", project_name: "Sketch comedy app", project_summary: "Challenge your friends and family to a game of improv and sketch comedy", amount_due: 2999.99, date: Date.parse('07/11/2004 3:25'), user_id: client2.id })
+Invoice.create({ client_name: "Mattel", project_name: "iOS action_figure app", project_summary: "Become your favorite superheroes and villians, fight other players with blocky movement, and unlock new characters", amount_due: 3999.99, date: Date.parse('10/5/2012 10:47'), status: false, user: client1})
+Invoice.create({ client_name: "Mattel", project_name: "Company blog", project_summary: "Company blog where select users can create posts for all to see", amount_due: 1599.99, date: Date.parse('02/12/1997 3:25'), status: false, user: client1 })
+Invoice.create({ client_name: "Mattel", project_name: "Charades app", project_summary: "Test your acting skills with charades app themed with NBC shows and programming", amount_due: 3599.99, date: Date.parse('06/12/1999 4:25'), status: false, user: admin })
+Invoice.create({ client_name: "NBC", project_name: "TV remote app", project_summary: "Control your TV from your phone", amount_due: 5699.99, date: Date.parse('01/02/2000 1:25'), status: false, user_id: client2.id })
+Invoice.create({ client_name: "NBC", project_name: "Trivial pursuit app", project_summary: "Be king/queen of TV and show off to your friends and family with your frivolous knowledge", amount_due: 2799.99, date: Date.parse('04/06/2002 3:25'), status: false, user_id: client2.id })
+Invoice.create({ client_name: "NBC", project_name: "Movie preview app", project_summary: "Watch movie previes, read moving ratings from Rotten Tomatoes, and share with your friends and family your reviews!", amount_due: 6899.99, date: Date.parse('04/12/2003 3:25'), status: false, user_id: client2.id })
+Invoice.create({ client_name: "NBC", project_name: "Sketch comedy app", project_summary: "Challenge your friends and family to a game of improv and sketch comedy", amount_due: 2999.99, date: Date.parse('07/11/2004 3:25'), status: false, user_id: client2.id })
 
 
 # client1.invoices.create({ client_name: "Mattel", project_name: "iOS action_figure app", project_summary: "Become your favorite superheroes and villians, fight other players with blocky movement, and unlock new characters", amount_due: 3999.99, date: Date.parse('10/5/2012 10:47')})
 
-invoice1 = Invoice.new
-invoice1.client_name = "Mattel"
-invoice1.project_name = "iOS action_figure app"
-invoice1.project_summary = "Become your favorite superheroes and villians, fight other players with blocky movement, and unlock new characters"
-invoice1.amount_due = 3999.99
-invoice1.date = Date.parse('10/5/2012 10:47')
-invoice1.user = client1
-invoice1.save
+# invoice1 = Invoice.new
+# invoice1.client_name = "Mattel"
+# invoice1.project_name = "iOS action_figure app"
+# invoice1.project_summary = "Become your favorite superheroes and villians, fight other players with blocky movement, and unlock new characters"
+# invoice1.amount_due = 3999.99
+# invoice1.date = Date.parse('10/5/2012 10:47')
+# invoice1.user = client1
+# invoice1.save
