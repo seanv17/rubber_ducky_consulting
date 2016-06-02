@@ -17,10 +17,14 @@ class InvoicesController < ApplicationController
   end
 
   def create
-    invoice = Invoice.new(invoice_params)
-
-    if invoice.save
-      redirect_to invoice_path(invoice)
+    @invoice = Invoice.new(invoice_params)
+    @invoice.user_id = current_user.id
+    if @invoice.save
+      redirect_to invoice_path(@invoice)
+      flash[:notice] = "Invoice successfully created"
+    else
+      flash[:error] = @invoice.errors.full_messages.join(" , ")
+      render :new
     end
   end
 
@@ -31,7 +35,8 @@ class InvoicesController < ApplicationController
   def update
     @invoice = Invoice.find_by_id(params[:id])
     if @invoice.update(invoice_params)
-      redirect_to invoice_path, notice: "Invoice was successfully updated"
+      flash[:notice] = "Invoice was successfully updated"
+      redirect_to invoice_path
     else
       flash[:error] = @invoice.errors.full_messages.join(", ")
       render :edit
