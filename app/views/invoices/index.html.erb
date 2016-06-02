@@ -1,13 +1,13 @@
 <div id="invoice_index">
   <div class="container">
       <h3>Invoices</h3>
-      <% if current_user[:role] === User.roles[:admin] %>
+      <% if current_user[:role] == User.roles[:admin] %>
         <%= button_to 'Create new Invoice', new_invoice_path, method: :get %>
       <% end %>
           <% @invoices.each do |invoice| %>
           <b>Invoice ID:</b> <%= link_to invoice.id, invoice_path( Invoice.find(invoice.id) ) %><br>
           <b>Date:</b> <%= invoice.date.strftime("%m/%d/%Y") %><br>
-          <% if current_user[:role] === User.roles[:admin] %>
+          <% if current_user[:role] == User.roles[:admin] %>
           <b>Client Name:</b>
             <% if invoice.user_id == 37 %>
               <%= invoice.client_name = "Mattell" %><br>
@@ -19,7 +19,7 @@
           <b>Project Summary:</b> <%= invoice.project_summary %><br>
           <b>Amount Due:</b> $<%= invoice.amount_due %><br>
           <b>Status:</b> <%= yesno(invoice.status) %><br>
-          <% if current_user[:role] === User.roles[:admin] %>
+          <% if current_user[:role] == User.roles[:admin] %>
           <%= button_to 'Edit', edit_invoice_path(invoice.id), method: :get %>
           <%= button_to 'Delete', invoice, method: :delete %>
           <% end %>

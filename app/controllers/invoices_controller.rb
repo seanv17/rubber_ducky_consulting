@@ -1,7 +1,7 @@
 class InvoicesController < ApplicationController
 
   def index
-    if current_user[:role] === User.roles[:admin]
+    if current_user[:role] == User.roles[:admin]
     @invoices = Invoice.all.sort_by { |a| a.status ? 1 : 0 }
     else
       @invoices = current_user.invoices.sort_by { |a| a.status ? 1 : 0 }
@@ -9,7 +9,11 @@ class InvoicesController < ApplicationController
   end
 
   def show
-    @invoice = Invoice.find(params[:id])
+    if current_user
+      @invoice = Invoice.find(params[:id])
+    else
+      redirect_to invoices_path
+    end
   end
 
   def new
