@@ -1,36 +1,33 @@
 class UsersController < ApplicationController
 
   def show
-    if User.exists? params[:id]
-      @user = User.find(params[:id]) || "No User"
-        render :show
+    @user = User.find_by_id(params[:id])
+    if
+      @user == current_user
     else
-      redirect_to root_path
+      redirect_to home_path
+      flash[:error] = "Not authorized"
     end
   end
 
   def edit
-    if User.exists? params[:id]
-      @user = User.find(params[:id])
-      if current_user == @user
-        render :edit
-      else
-        flash[:error] = "You can only edit your own profile"
-        redirect_to root_path
-      end
+    @user = User.find(params[:id])
+    if current_user == @user
+      render :edit
     else
-      redirect_to root_path
+      flash[:error] = "You can only edit your own profile"
+      redirect_to home_path
     end
   end
 
   def update
-    set_user
-    if @user.update_attributes(user_params)
+    if access?(@user.id) && @user.update_attributes(user_params)
       flash[:notice] = "User information updated successfully"
+      redirect_to user_path
     else
-       flash[:error] = @user.errors.full_messages.join(", ")
+      redirect_to home_path
+      flash[:error] = @user.errors.full_messages.join(", ")
     end
-    redirect_to user_path(@user)
   end
 
   def index
@@ -39,13 +36,13 @@ class UsersController < ApplicationController
   end
 
   private
-  def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :company)
+
+  def access?(user_id)
+    current_user ? user_id == current_user.id : false
   end
 
-  def set_user
-    user_id = params[:id]
-    @user = User.find(user_id)
+  def user_params
+    params.require(:user).permit(:first_name, :last_name, :email, :company)
   end
 
 end

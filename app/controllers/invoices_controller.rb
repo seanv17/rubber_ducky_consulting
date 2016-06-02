@@ -13,7 +13,7 @@ class InvoicesController < ApplicationController
   def show
     invoice = Invoice.find(params[:id])
 
-    if current_user.id == invoice.user_id
+    if current_user.id == invoice.user_id || current_user[:role] == User.roles[:admin]
       @invoice = Invoice.find(params[:id])
     else
       redirect_to invoices_path
