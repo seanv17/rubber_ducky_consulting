@@ -1,61 +1,66 @@
 <div id="invoice_index">
   <div class="container">
-        <p>
-          <b>Date:</b> <%= @invoice.date %><br>
-          <b>Invoice ID:</b> <%= @invoice.id %><br>
-          <b>Client Name:</b> <%= @invoice.client_name %><br>
-          <b>Project Name:</b> <%= @invoice.project_name %><br>
-          <b>Project Summary:</b> <%= @invoice.project_summary %><br>
-          <%= form_tag charges_path, id: 'chargeForm' do %>
-          <script src="https://checkout.stripe.com/checkout.js"></script>
-          <b>Amount Due:</b> $<span id="amount"><%= @invoice.amount_due %></span><br>
-          <b>Status:</b> <%= yesno(@invoice.status) %><br>
-        </p>
-        <% if current_user[:role] === User.roles[:admin] %>
-        <%= link_to 'Edit', edit_invoice_path(@invoice) %>
-        <% end %>
+    <p>
+      <b>Date:</b> <%= @invoice.date %><br>
+      <b>Invoice ID:</b> <%= @invoice.id %><br>
+      <b>Client Name:</b>
+      <% if @invoice.user_id == 37 %>
+        <%= @invoice.client_name = "Mattell" %><br>
+      <% else %>
+        <%= @invoice.client_name = "NBC" %><br>
+      <% end %>
+      <b>Project Name:</b> <%= @invoice.project_name %><br>
+      <b>Project Summary:</b> <%= @invoice.project_summary %><br>
+      <%= form_tag charges_path, id: 'chargeForm' do %>
+      <script src="https://checkout.stripe.com/checkout.js"></script>
+      <b>Amount Due:</b> $<span id="amount"><%= @invoice.amount_due %></span><br>
+      <b>Status:</b> <%= yesno(@invoice.status) %><br>
+    </p>
+    <% if current_user[:role] === User.roles[:admin] %>
+    <%= link_to 'Edit', edit_invoice_path(@invoice) %>
+    <% end %>
 
-          <%= hidden_field_tag 'stripeToken' %>
-          <%= hidden_field_tag 'stripeEmail' %>
-          <%= hidden_field_tag 'stripeAmount' %>
-          <!-- Used to pass in invoice id into Stripe charge object -->
-          <%= hidden_field_tag 'description' %>
-          <a class="waves-effect waves-light btn"><i class="material-icons left" id="pay_button">shop</i>Pay</a>
+      <%= hidden_field_tag 'stripeToken' %>
+      <%= hidden_field_tag 'stripeEmail' %>
+      <%= hidden_field_tag 'stripeAmount' %>
+      <!-- Used to pass in invoice id into Stripe charge object -->
+      <%= hidden_field_tag 'description' %>
+      <a class="waves-effect waves-light btn"><i class="material-icons left" id="pay_button">shop</i>Pay</a>
 
-          <script>
-            var handler = StripeCheckout.configure({
-              key: 'pk_test_fYMi4SRFR2V6BGIUqYh6Hohe',
-              image: '#',
-              locale: 'auto',
-              token: function(token, args) {
-                document.getElementById("stripeToken").value = token.id;
-                document.getElementById("stripeEmail").value = token.email;
-                document.getElementById("stripeAmount").value = <%= @invoice.amount_due %>;
-                // Populate stripe description object with invoice id
-                document.getElementById("description").value = <%= @invoice.id %>;
-                document.getElementById("chargeForm").submit();
-              }
-            });
+      <script>
+        var handler = StripeCheckout.configure({
+          key: 'pk_test_fYMi4SRFR2V6BGIUqYh6Hohe',
+          image: '#',
+          locale: 'auto',
+          token: function(token, args) {
+            document.getElementById("stripeToken").value = token.id;
+            document.getElementById("stripeEmail").value = token.email;
+            document.getElementById("stripeAmount").value = <%= @invoice.amount_due %>;
+            // Populate stripe description object with invoice id
+            document.getElementById("description").value = <%= @invoice.id %>;
+            document.getElementById("chargeForm").submit();
+          }
+        });
 
-            document.getElementById('pay_button').addEventListener('click', function(e) {
-              console.log("stripe open");
-              // Set amount_due to amount to pass to Stripe
-              // var amount = parseInt($("#amount").text()) * 100;
-              // Open Checkout with further options:
-              handler.open({
-                name: 'Customers name',
-                description: 'Invoice payment',
-                amount: <%= @invoice.amount_due * 100 %>
-              });
-              e.preventDefault();
-            });
+        document.getElementById('pay_button').addEventListener('click', function(e) {
+          console.log("stripe open");
+          // Set amount_due to amount to pass to Stripe
+          // var amount = parseInt($("#amount").text()) * 100;
+          // Open Checkout with further options:
+          handler.open({
+            name: 'Customers name',
+            description: 'Invoice payment',
+            amount: <%= @invoice.amount_due * 100 %>
+          });
+          e.preventDefault();
+        });
 
-            // Close Checkout on page navigation:
-            $(window).on('popstate', function() {
-              console.log("stripe close");
-              handler.close();
-            });
-          </script>
-          <% end %>
+        // Close Checkout on page navigation:
+        $(window).on('popstate', function() {
+          console.log("stripe close");
+          handler.close();
+        });
+      </script>
+      <% end %>
   </div>
 </div>

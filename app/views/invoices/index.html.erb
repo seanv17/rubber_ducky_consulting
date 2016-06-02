@@ -8,7 +8,12 @@
           <b>Invoice ID:</b> <%= link_to invoice.id, invoice_path( Invoice.find(invoice.id) ) %><br>
           <b>Date:</b> <%= invoice.date %><br>
           <% if current_user[:role] === User.roles[:admin] %>
-          <b>Client Name:</b> <%= invoice.client_name %><br>
+          <b>Client Name:</b>
+            <% if invoice.user_id == 37 %>
+              <%= invoice.client_name = "Mattell" %><br>
+            <% else %>
+              <%= invoice.client_name = "NBC" %><br>
+            <% end %>
           <% end %>
           <b>Project Name:</b> <%= invoice.project_name %><br>
           <b>Project Summary:</b> <%= invoice.project_summary %><br>
