@@ -16,9 +16,6 @@ class User < ActiveRecord::Base
 
   has_many :invoices
 
-  #callback for email confirmation through Devise
-  before_create :confirmation_token
-
   validates :first_name, :last_name, :email,
   presence: true,
   length: {maximum: 255}, on: :create
