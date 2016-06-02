@@ -15,11 +15,14 @@ class ChargesController < ApplicationController
     )
 
     charge = Stripe::Charge.create(
-      :customer     => customer.id,
-      :amount       => amount,
-      :currency     => 'usd',
-      :description  => params[:description]
+      :customer       => customer.id,
+      :receipt_email  => params[:stripeEmail],
+      :amount         => amount,
+      :currency       => 'usd',
+      :description    => params[:description]
     )
+
+    puts charge
 
     # Find invoice based on invoice id originally passed in from 'description' Stripe object
     @invoice = Invoice.find(charge[:description])
