@@ -9,7 +9,9 @@ class InvoicesController < ApplicationController
   end
 
   def show
-    if current_user
+    invoice = Invoice.find(params[:id])
+
+    if current_user.id == invoice.user_id
       @invoice = Invoice.find(params[:id])
     else
       redirect_to invoices_path
