@@ -1,7 +1,6 @@
 class InvoicesController < ApplicationController
   before_action :authenticate_user!
 
-
   def index
     if
       current_user[:role] == User.roles[:admin]
@@ -22,7 +21,13 @@ class InvoicesController < ApplicationController
   end
 
   def new
-    @invoice = Invoice.new
+    if
+      current_user[:role] == User.roles[:admin]
+      @invoice = Invoice.new
+    else
+      flash[:error] = "Not authorized"
+      redirect_to invoices_path
+    end
   end
 
   def create
