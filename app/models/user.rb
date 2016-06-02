@@ -20,11 +20,11 @@ class User < ActiveRecord::Base
   before_destroy :delete_invoices
 
   validates :first_name, :last_name, :email,
-  presence: true,
-  length: {maximum: 255}, on: :create
+    presence: true,
+    length: {maximum: 255}, on: :create
 
   validates :email,
-    unqiqueness: true,
+    uniqueness: true,
     format: {
       with: /(.+)@(.+)/,
       message: "not a valid email format"
