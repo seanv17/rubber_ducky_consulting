@@ -16,6 +16,9 @@ class User < ActiveRecord::Base
 
   has_many :invoices
 
+  # callback to delete invoices before user gets deleted
+  before_destroy :delete_invoices
+
   validates :first_name, :last_name, :email,
   presence: true,
   length: {maximum: 255}, on: :create
@@ -26,5 +29,9 @@ class User < ActiveRecord::Base
       with: /(.+)@(.+)/,
       message: "not a valid email format"
     }, on: :create
+
+    def delete_invoices
+      self.invoices.delete_all
+    end
 
 end
