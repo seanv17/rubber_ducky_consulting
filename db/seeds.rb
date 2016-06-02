@@ -27,5 +27,6 @@ invoice1.client_name = "Mattel"
 invoice1.project_name = "iOS action_figure app"
 invoice1.project_summary = "Become your favorite superheroes and villians, fight other players with blocky movement, and unlock new characters"
 invoice1.ammount_due = 3999.99
-invoice.date = Date.parse('10/5/2012 10:47')
-invoice.user = client1
+invoice1.date = Date.parse('10/5/2012 10:47')
+invoice1.user = client1
+invoice1.save
