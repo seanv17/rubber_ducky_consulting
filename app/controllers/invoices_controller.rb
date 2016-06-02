@@ -1,8 +1,11 @@
 class InvoicesController < ApplicationController
+  before_action :authenticate_user!
+
 
   def index
-    if current_user[:role] == User.roles[:admin]
-    @invoices = Invoice.all.sort_by { |a| a.status ? 1 : 0 }
+    if
+      current_user[:role] == User.roles[:admin]
+      @invoices = Invoice.all.sort_by { |a| a.status ? 1 : 0 }
     else
       @invoices = current_user.invoices.sort_by { |a| a.status ? 1 : 0 }
     end
