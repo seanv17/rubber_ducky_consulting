@@ -15,4 +15,16 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :invoices
+
+  validates :first_name, :last_name, :email,
+  presence: true,
+  length: {maximum: 255}, on: :create
+
+  validates :email,
+    unqiqueness: true,
+    format: {
+      with: /(.+)@(.+)/,
+      message: "not a valid email format"
+    }, on: :create
+    
 end
