@@ -18,7 +18,7 @@
 
  // Navbar
   @import "materialize/components/color";
-  $primary-color: color("blue", "lighten-2") !default;
+  $primary-color: color("light-blue", "darken-4") !default;
   @import 'materialize';
 
   .brand-logo {
