@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :charges
   resources :invoices
 
+  # Set route and controller action for homepage
   root to: 'home#home'
 
 end
