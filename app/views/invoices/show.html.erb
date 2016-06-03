@@ -27,7 +27,7 @@
       <%= hidden_field_tag 'description' %>
 
       <% if @invoice.status == false %>
-        <a class="waves-effect waves-light btn" id="pay_button">Pay Now</a>
+        <a class="waves-effect waves-light btn blue" id="pay_button">Pay Now</a>
       <% end %>
 
       <script>
@@ -51,8 +51,8 @@
           // var amount = parseInt($("#amount").text()) * 100;
           // Open Checkout with further options:
           handler.open({
-            name: 'Customers name',
-            description: 'Invoice payment',
+            name: 'Rubber Ducky Consulting',
+            description: 'Invoice Payment',
             amount: <%= @invoice.amount_due * 100 %>
           });
           e.preventDefault();
