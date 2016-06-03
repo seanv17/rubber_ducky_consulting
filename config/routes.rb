@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  # resources :invoices
+  # Set routes for charges and invoices controllers
   resources :charges
   resources :invoices
 
