@@ -55,10 +55,10 @@ class InvoicesController < ApplicationController
     if user_signed_in?
        @invoice = Invoice.find_by_id(params[:id])
     if @invoice.update(invoice_params)
-       flash.now[:notice] = "Invoice was successfully updated"
+       flash[:notice] = "Invoice was successfully updated"
        redirect_to invoice_path
     else
-       flash.now[:error] = @invoice.errors.full_messages.join(", ")
+       flash[:error] = @invoice.errors.full_messages.join(", ")
        render :edit
     end
     end
