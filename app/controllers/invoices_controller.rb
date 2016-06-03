@@ -26,7 +26,7 @@ class InvoicesController < ApplicationController
     if current_user[:role] == User.roles[:admin]
        @invoice = Invoice.new
     else
-       flash.now[:error] = "Not authorized"
+       flash[:error] = "Not authorized"
        redirect_to invoices_path
     end
   end
