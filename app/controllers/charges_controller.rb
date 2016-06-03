@@ -30,6 +30,10 @@ class ChargesController < ApplicationController
       @invoice.update_attribute(:status, true)
     end
 
+    puts "@invoie: " + @invoice.to_s
+    puts "charge: " + charge.to_s
+    puts "charge: " + charge[:paid].to_s
+
     if charge.save
       redirect_to invoices_path
       flash[:notice] = "Payment was successfully submitted"

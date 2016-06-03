@@ -17,15 +17,15 @@
           <% end %>
           <b>Project Name:</b> <%= invoice.project_name %><br>
           <b>Project Summary:</b> <%= invoice.project_summary %><br>
-          <%= form_tag charges_path, id: 'chargeForm' do %>
-          <script src="https://checkout.stripe.com/checkout.js"></script>
           <b>Amount Due:</b> $<%= number_with_precision(invoice.amount_due, precision: 2) %><br>
           <b>Status:</b> <%= yesno(invoice.status) %><br><br>
           <% if current_user[:role] == User.roles[:admin] %>
-          <%= button_to 'Edit', edit_invoice_path(invoice.id), method: :get %>
-          <%= button_to 'Delete', invoice, method: :delete %>
+            <%= button_to 'Edit', edit_invoice_path(invoice), method: :get %>
+            <%= button_to 'Delete', invoice, method: :delete %>
           <% end %>
 
+          <%= form_tag charges_path, id: 'chargeForm' do %>
+          <script src="https://checkout.stripe.com/checkout.js"></script>
           <%= hidden_field_tag 'stripeToken' %>
           <%= hidden_field_tag 'stripeEmail' %>
           <%= hidden_field_tag 'stripeAmount' %>

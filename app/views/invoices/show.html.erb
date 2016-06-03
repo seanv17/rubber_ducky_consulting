@@ -15,7 +15,7 @@
       <b>Status:</b> <%= yesno(@invoice.status) %><br>
     </p>
     <% if current_user[:role] === User.roles[:admin] %>
-    <%= link_to 'Edit', edit_invoice_path(@invoice) %>
+      <%= button_to 'Edit', edit_invoice_path(@invoice), method: :get %>
     <% end %>
 
     <%= form_tag charges_path, id: 'chargeForm' do %>
@@ -26,9 +26,7 @@
       <!-- Used to pass in invoice id into Stripe charge object -->
       <%= hidden_field_tag 'description' %>
 
-      <% if @invoice.status == false %>
-      <a class="waves-effect waves-light btn" id="pay_button">Pay Now</a>
-      <% end %>
+        <a class="waves-effect waves-light btn" id="pay_button">Pay Now</a>
 
       <script>
         var handler = StripeCheckout.configure({
