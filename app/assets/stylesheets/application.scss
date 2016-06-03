@@ -21,6 +21,19 @@
   $primary-color: color("blue", "lighten-2") !default;
   @import 'materialize';
 
+  .brand-logo {
+    font-family: 'Righteous', cursive;
+    margin-left: 10px;
+  }
+
+  #white-text {
+    margin-top: 2px;
+    font-family: 'Righteous', cursive;
+    text-transform: uppercase;
+    color: white;
+  }
+
+ // Footer
  // Override Materialize default margin-top 20
   #custom-footer {
     margin-top: 0;
@@ -31,9 +44,8 @@
     height: 75px;
   }
 
-.brand-logo {
-  font-family: 'Righteous', cursive;
-  margin-left: 10px;
+#ducky-logo {
+  height: 40px;
 }
 
  // ********************************  HOMEPAGE *********************************
