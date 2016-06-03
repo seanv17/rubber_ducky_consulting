@@ -24,15 +24,12 @@ class ChargesController < ApplicationController
       :description    => params[:description]
     )
 
+    # From Invoice Show:
     # Find invoice based on invoice id originally passed in from 'description' Stripe object
     @invoice = Invoice.find(charge[:description])
     if charge[:paid]
       @invoice.update_attribute(:status, true)
     end
-
-    puts "@invoie: " + @invoice.to_s
-    puts "charge: " + charge.to_s
-    puts "charge: " + charge[:paid].to_s
 
     if charge.save
       redirect_to invoices_path

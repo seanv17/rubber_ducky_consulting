@@ -26,7 +26,9 @@
       <!-- Used to pass in invoice id into Stripe charge object -->
       <%= hidden_field_tag 'description' %>
 
+      <% if @invoice.status == false %>
         <a class="waves-effect waves-light btn" id="pay_button">Pay Now</a>
+      <% end %>
 
       <script>
         var handler = StripeCheckout.configure({
