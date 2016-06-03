@@ -17,7 +17,7 @@
           <% end %>
           <b>Project Name:</b> <%= invoice.project_name %><br>
           <b>Project Summary:</b> <%= invoice.project_summary %><br>
-          <b>Amount Due:</b> $<%= invoice.amount_due %><br>
+          <b>Amount Due:</b> $<%= number_with_precision(invoice.amount_due, precision: 2) %><br>
           <b>Status:</b> <%= yesno(invoice.status) %><br>
           <% if current_user[:role] == User.roles[:admin] %>
           <%= button_to 'Edit', edit_invoice_path(invoice.id), method: :get %>
