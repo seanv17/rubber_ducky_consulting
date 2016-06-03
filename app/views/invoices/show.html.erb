@@ -1,8 +1,8 @@
 <div id="invoice_index">
   <div class="container">
+    <h3 id="invoices-h3">Invoice #<%= @invoice.id %></h3>
     <p>
       <b>Date:</b> <%= @invoice.date.strftime("%m/%d/%Y") %><br>
-      <b>Invoice ID:</b> <%= @invoice.id %><br>
       <b>Client Name:</b>
       <% if @invoice.user_id == 37 %>
         <%= @invoice.client_name = "Mattell" %><br>
@@ -11,8 +11,6 @@
       <% end %>
       <b>Project Name:</b> <%= @invoice.project_name %><br>
       <b>Project Summary:</b> <%= @invoice.project_summary %><br>
-      <%= form_tag charges_path, id: 'chargeForm' do %>
-      <script src="https://checkout.stripe.com/checkout.js"></script>
       <b>Amount Due:</b> $<span id="amount"><%= @invoice.amount_due %></span><br>
       <b>Status:</b> <%= yesno(@invoice.status) %><br>
     </p>
@@ -20,12 +18,17 @@
     <%= link_to 'Edit', edit_invoice_path(@invoice) %>
     <% end %>
 
+    <%= form_tag charges_path, id: 'chargeForm' do %>
+    <script src="https://checkout.stripe.com/checkout.js"></script>
       <%= hidden_field_tag 'stripeToken' %>
       <%= hidden_field_tag 'stripeEmail' %>
       <%= hidden_field_tag 'stripeAmount' %>
       <!-- Used to pass in invoice id into Stripe charge object -->
       <%= hidden_field_tag 'description' %>
+
+      <% if @invoice.status == false %>
       <a class="waves-effect waves-light btn" id="pay_button">Pay Now</a>
+      <% end %>
 
       <script>
         var handler = StripeCheckout.configure({
