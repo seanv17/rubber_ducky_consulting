@@ -4,6 +4,8 @@
     <p>
       <b>Date:</b> <%= @invoice.date.strftime("%m/%d/%Y") %><br>
       <b>Client Name:</b>
+      <!-- TODO!! -->
+      <!-- Change this to make it dynamic!! -->
       <% if @invoice.user_id == 37 %>
         <%= @invoice.client_name = "Mattell" %><br>
       <% else %>
@@ -12,34 +14,41 @@
       <b>Project Name:</b> <%= @invoice.project_name %><br>
       <b>Project Summary:</b> <%= @invoice.project_summary %><br>
       <b>Amount Due:</b> $<span id="amount"><%= @invoice.amount_due %></span><br>
+      <!-- Calls invoice helper to translate boolean to "Paid" or "Unpaid" -->
       <b>Status:</b> <%= yesno(@invoice.status) %><br>
     </p>
+    <!-- If current user is the admin, Edit button is available -->
     <% if current_user[:role] === User.roles[:admin] %>
       <%= button_to 'Edit', edit_invoice_path(@invoice), method: :get %>
     <% end %>
 
+    <!-- Start of Stripe form create -->
     <%= form_tag charges_path, id: 'chargeForm' do %>
     <script src="https://checkout.stripe.com/checkout.js"></script>
+      <!-- Hidden fields to declare variables to pass to Stripe charge or customer objects -->
       <%= hidden_field_tag 'stripeToken' %>
       <%= hidden_field_tag 'stripeEmail' %>
       <%= hidden_field_tag 'stripeAmount' %>
-      <!-- Used to pass in invoice id into Stripe charge object -->
       <%= hidden_field_tag 'description' %>
 
       <% if @invoice.status == false %>
         <a class="waves-effect waves-light btn blue" id="pay_button">Pay Now</a>
       <% end %>
 
+      <!-- Stripe handler when Pay Now button is clicked -->
       <script>
         var handler = StripeCheckout.configure({
           key: 'pk_test_fYMi4SRFR2V6BGIUqYh6Hohe',
           image: '/assets/rubber-ducky.gif',
           locale: 'auto',
           token: function(token, args) {
+            // Grab values to pass into Stripe charge or customer objects
             document.getElementById("stripeToken").value = token.id;
             document.getElementById("stripeEmail").value = token.email;
             document.getElementById("stripeAmount").value = <%= @invoice.amount_due %>;
-            // Populate stripe description object with invoice id
+            // Disguised invoice id in 'description' variable
+            // Stripe does not have dedicated variable for invoice ID
+            // Invoice ID required to update invoice status in charges controller
             document.getElementById("description").value = <%= @invoice.id %>;
             document.getElementById("chargeForm").submit();
           }
@@ -47,12 +56,11 @@
 
         document.getElementById('pay_button').addEventListener('click', function(e) {
           console.log("stripe open");
-          // Set amount_due to amount to pass to Stripe
-          // var amount = parseInt($("#amount").text()) * 100;
           // Open Checkout with further options:
           handler.open({
             name: 'Rubber Ducky Consulting',
             description: 'Invoice Payment',
+            // Set dynamic amount value to pass into Stripe charge object
             amount: <%= @invoice.amount_due * 100 %>
           });
           e.preventDefault();
