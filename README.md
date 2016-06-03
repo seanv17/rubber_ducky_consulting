@@ -19,11 +19,11 @@ Rubber Ducky Consulting is a payment app for freelancers, independent contractor
 4. Rake db:migrate
 5. Rake db:seed
 
-### [User Story](https://goo.gl/7Ko1ub)
+### [User Story](https://goo.gl/b1aCUi)
 
-### [Wire Frames](https://goo.gl/GJuliO)
+### [Wire Frames](https://goo.gl/8VDTyV)
 
-### [ERD](https://goo.gl/2WKhxX)
+### [ERD](https://goo.gl/MmkQap)
 
 ### Planned Features
 1. Deploy Stripe in live mode
