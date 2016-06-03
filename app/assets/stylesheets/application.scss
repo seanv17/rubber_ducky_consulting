@@ -17,3 +17,8 @@
  @import "materialize/components/color";
  $primary-color: color("blue", "lighten-2") !default;
  @import 'materialize';
+
+// override Materialize default margin-top 20
+ #custom-footer {
+   margin-top: 0;
+ }
