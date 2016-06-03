@@ -14,11 +14,21 @@
  *= require_self
  */
 
- @import "materialize/components/color";
- $primary-color: color("blue", "lighten-2") !default;
- @import 'materialize';
+ // *********************************  GLOBALS *********************************
 
-// override Materialize default margin-top 20
- #custom-footer {
-   margin-top: 0;
- }
+ // Navbar
+  @import "materialize/components/color";
+  $primary-color: color("blue", "lighten-2") !default;
+  @import 'materialize';
+
+ // override Materialize default margin-top 20
+  #custom-footer {
+    margin-top: 0;
+  }
+
+.brand-logo {
+  font-family: 'Righteous', cursive;
+}
+
+
+ // *********************************  GLOBALS *********************************
