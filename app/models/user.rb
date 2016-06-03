@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
 
   has_many :invoices
 
-  # callback to delete invoices before user gets deleted
+  # Before deleting user, delete user's invoices first
   before_destroy :delete_invoices
 
   validates :first_name, :last_name, :email,
@@ -29,6 +29,7 @@ class User < ActiveRecord::Base
       message: "not a valid email format"
     }, on: :create
 
+    # Callback function for cascade delete
     def delete_invoices
       self.invoices.delete_all
     end
