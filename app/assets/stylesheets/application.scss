@@ -21,9 +21,14 @@
   $primary-color: color("blue", "lighten-2") !default;
   @import 'materialize';
 
- // override Materialize default margin-top 20
+ // Override Materialize default margin-top 20
   #custom-footer {
     margin-top: 0;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 75px;
   }
 
 .brand-logo {
