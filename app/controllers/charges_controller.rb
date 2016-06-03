@@ -9,11 +9,13 @@ class ChargesController < ApplicationController
     amount = params[:stripeAmount].to_i * 100
     Stripe.api_key = "sk_test_PBG7t6ioRODdf7GSj2mrgQGo"
 
+    # Create Stripe customer object
     customer = Stripe::Customer.create(
       email: params[:stripeEmail],
       card:  params[:stripeToken]
     )
 
+    # Create Stripe Charge object
     charge = Stripe::Charge.create(
       :customer       => customer.id,
       :receipt_email  => params[:stripeEmail],

@@ -2,32 +2,32 @@ class InvoicesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    if
-      current_user[:role] == User.roles[:admin]
-      @invoices = Invoice.all.sort_by { |a| a.status ? 1 : 0 }
+    # If current user is admin, show all invoies, otherwise only show user's invoices
+    if current_user[:role] == User.roles[:admin]
+       @invoices = Invoice.all.sort_by { |a| a.status ? 1 : 0 }
     else
-      @invoices = current_user.invoices.sort_by { |a| a.status ? 1 : 0 }
+       @invoices = current_user.invoices.sort_by { |a| a.status ? 1 : 0 }
     end
   end
 
   def show
     invoice = Invoice.find(params[:id])
-
+    # Show only available to current user and admin
     if current_user.id == invoice.user_id || current_user[:role] == User.roles[:admin]
-      @invoice = Invoice.find(params[:id])
+       @invoice = Invoice.find(params[:id])
     else
-      flash[:error] = "Not authorized"
-      redirect_to invoices_path
+       flash[:error] = "Not authorized"
+       redirect_to invoices_path
     end
   end
 
   def new
-    if
-      current_user[:role] == User.roles[:admin]
-      @invoice = Invoice.new
+    # Only available to admin
+    if current_user[:role] == User.roles[:admin]
+       @invoice = Invoice.new
     else
-      flash.now[:error] = "Not authorized"
-      redirect_to invoices_path
+       flash.now[:error] = "Not authorized"
+       redirect_to invoices_path
     end
   end
 
@@ -35,49 +35,45 @@ class InvoicesController < ApplicationController
     @invoice = Invoice.new(invoice_params)
 
     if @invoice.save
-      redirect_to invoice_path(@invoice)
-      flash.now[:notice] = "Invoice successfully created"
+       redirect_to invoice_path(@invoice)
+       flash.now[:notice] = "Invoice successfully created"
     else
-      flash.now[:error] = @invoice.errors.full_messages.join(" , ")
-      render :new
+       flash.now[:error] = @invoice.errors.full_messages.join(" , ")
+       render :new
     end
   end
 
   def edit
-    if
-      current_user[:role] == User.roles[:admin]
-      @invoice = Invoice.find_by_id(params[:id])
+    if current_user[:role] == User.roles[:admin]
+       @invoice = Invoice.find_by_id(params[:id])
     else
-      flash[:error] = "Not authorized"
-      redirect_to invoices_path
+       flash[:error] = "Not authorized"
+       redirect_to invoices_path
     end
   end
 
   def update
-    if
-      user_signed_in?
-      @invoice = Invoice.find_by_id(params[:id])
-    if
-      @invoice.update(invoice_params)
-      flash.now[:notice] = "Invoice was successfully updated"
-      redirect_to invoice_path
+    if user_signed_in?
+       @invoice = Invoice.find_by_id(params[:id])
+    if @invoice.update(invoice_params)
+       flash.now[:notice] = "Invoice was successfully updated"
+       redirect_to invoice_path
     else
-      flash.now[:error] = @invoice.errors.full_messages.join(", ")
-      render :edit
+       flash.now[:error] = @invoice.errors.full_messages.join(", ")
+       render :edit
     end
     end
   end
 
   def destroy
-    if
-      user_signed_in?
-      invoice = Invoice.find_by_id(params[:id])
+    if user_signed_in?
+       invoice = Invoice.find_by_id(params[:id])
     if invoice.destroy
-      flash[:notice] = "Invoice was successfully deleted"
-      redirect_to invoices_path
+       flash[:notice] = "Invoice was successfully deleted"
+       redirect_to invoices_path
     else
-      flash[:error] = @invoice.errors.full_messages.join(" , ")
-      render :edit
+       flash[:error] = @invoice.errors.full_messages.join(" , ")
+       render :edit
     end
     end
   end
