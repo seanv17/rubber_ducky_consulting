@@ -2,11 +2,10 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by_id(params[:id])
-    if
-      @user == current_user
-    else
-      redirect_to home_path
-      flash[:error] = "Not authorized"
+    if @user == current_user
+      else
+        redirect_to home_path
+        flash[:error] = "Not authorized"
     end
   end
 

@@ -33,7 +33,6 @@ class InvoicesController < ApplicationController
 
   def create
     @invoice = Invoice.new(invoice_params)
-
     if @invoice.save
        redirect_to invoice_path(@invoice)
        flash.now[:notice] = "Invoice successfully created"
