@@ -26,26 +26,20 @@
     margin-left: 10px;
   }
 
-  #white-text {
-    margin-top: 2px;
-    font-family: 'Righteous', cursive;
-    text-transform: uppercase;
-    color: white;
-  }
-
  // Footer
  // Override Materialize default margin-top 20
-  #custom-footer {
-    margin-top: 0;
-    position: fixed;
-    bottom: 0px;
-    left: 0px;
-    width: 100vw;
-    height: 75px;
+#custom-footer {
+  margin-top: 0px;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
   }
 
-#ducky-logo {
-  height: 40px;
+#main {
+  flex: 1 0 auto;
 }
 
  // ********************************  HOMEPAGE *********************************
