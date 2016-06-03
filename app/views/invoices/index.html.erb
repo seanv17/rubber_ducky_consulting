@@ -1,6 +1,7 @@
 <div id="invoice_index">
   <div class="container">
       <h3 id="invoices-h3">Invoices</h3>
+      <!-- If current user is the admin, Create New Invoice button is available -->
       <% if current_user[:role] == User.roles[:admin] %>
         <%= button_to 'Create new Invoice', new_invoice_path, method: :get %>
       <% end %>
@@ -9,6 +10,8 @@
           <b>Date:</b> <%= invoice.date.strftime("%m/%d/%Y") %><br>
           <% if current_user[:role] == User.roles[:admin] %>
           <b>Client Name:</b>
+            <!-- TODO!!! -->
+            <!-- Change this to make it dynamic!! -->
             <% if invoice.user_id == 37 %>
               <%= invoice.client_name = "Mattell" %><br>
             <% else %>
@@ -17,12 +20,14 @@
           <% end %>
           <b>Project Name:</b> <%= invoice.project_name %><br>
           <b>Project Summary:</b> <%= invoice.project_summary %><br>
+          <!-- Display amount due to the 2nd decimal -->
           <b>Amount Due:</b> $<%= number_with_precision(invoice.amount_due, precision: 2) %><br><br>
           <% if invoice.status == false %>
             <div id="red_button"><%= yesno(invoice.status) %></div><br>
           <% else %>
             <a class="btn disabled"><%= yesno(invoice.status) %></a>
           <% end %>
+          <!-- If current user is the admin, Edit and Delete buttons are available -->
           <% if current_user[:role] == User.roles[:admin] %>
             <%= button_to 'Edit', edit_invoice_path(invoice), method: :get %>
             <%= button_to 'Delete', invoice, method: :delete %>
