@@ -2,7 +2,7 @@ class InvoicesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    # If current user is admin, show all invoies, otherwise only show user's invoices
+    # If current user is admin, show all invoies, otherwise only show current user's invoices
     if current_user[:role] == User.roles[:admin]
        @invoices = Invoice.all.sort_by { |a| a.status ? 1 : 0 }
     else
@@ -12,7 +12,7 @@ class InvoicesController < ApplicationController
 
   def show
     invoice = Invoice.find(params[:id])
-    # Show only available to current user and admin
+    # Show only if current user or admin
     if current_user.id == invoice.user_id || current_user[:role] == User.roles[:admin]
        @invoice = Invoice.find(params[:id])
     else
@@ -35,9 +35,9 @@ class InvoicesController < ApplicationController
     @invoice = Invoice.new(invoice_params)
     if @invoice.save
        redirect_to invoice_path(@invoice)
-       flash.now[:notice] = "Invoice successfully created"
+       flash[:notice] = "Invoice successfully created"
     else
-       flash.now[:error] = @invoice.errors.full_messages.join(" , ")
+       flash[:error] = @invoice.errors.full_messages.join(" , ")
        render :new
     end
   end
